@@ -7,12 +7,10 @@ const int N = 8;
 
 int chess[N][N];
 
-// 检查坐标(i, j)的棋子颜色
 int checkChessColor(int i, int j) {
     return chess[i][j];
 }
 
-// 查找在坐标(i, j)位置可以下子的位置
 vector<pair<int, int>> findValidMoves(int i, int j) {
     vector<pair<int, int>> validMoves;
     int currentColor = checkChessColor(i, j);
@@ -21,7 +19,6 @@ vector<pair<int, int>> findValidMoves(int i, int j) {
         return validMoves;
     }
 
-    // 八个方向的偏移量
     int dx[] = {0, 1, 0, -1, 1, -1, 1, -1};
     int dy[] = {1, 0, -1, 0, 1, -1, -1, 1};
 
@@ -47,17 +44,15 @@ vector<pair<int, int>> findValidMoves(int i, int j) {
 }
 
 int main() {
-    // 在这里初始化棋盘内容
-    // 例如，将棋盘中的某些格子设置为1（黑棋）或2（白棋）
     
-    int i = 3, j = 3;  // 你要查询的坐标
+    int i = 3, j = 3;
 
     int chessColor = checkChessColor(i, j);
     vector<pair<int, int>> validMoves = findValidMoves(i, j);
 
     cout << "(" << i << ", " << j << ") 是" << (chessColor == 1 ? "黑棋" : (chessColor == 2 ? "白棋" : "空白")) << endl;
     
-    cout << "(" << i << ", " << j << ") 的可下子位置为：";
+    cout << "(" << i << ", " << j << ") 的可下子位置為：";
     for (pair<int, int> move : validMoves) {
         cout << "(" << move.first << ", " << move.second << ") ";
     }
