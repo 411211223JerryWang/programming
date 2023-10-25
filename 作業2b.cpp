@@ -49,7 +49,7 @@ int w_around(int i,int j){
 //執行
 int main(){
     //隨機生成棋盤
-    int myArray[] = {0,0,1,2};
+    int myArray[] = {0,0,0,1,2};
     int arraySize = sizeof(myArray) / sizeof(myArray[0]);
     std::random_device rd;
     std::mt19937 gen(rd());
