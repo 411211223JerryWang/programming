@@ -26,6 +26,7 @@ int b_around(int i,int j){
                 }
             }
         }
+        else return 0;
     }
  }
 //判斷白棋周圍8格是否可下和是否夾住
@@ -44,6 +45,7 @@ int w_around(int i,int j){
                 }
             }
         }
+        else return 0;
     }
 }
 //執行
@@ -99,7 +101,7 @@ int main(){
                 printf("%d\n",J);
                 break;
             }
-            else{
+            if(b_around(I,J) == 0){
                 printf("黑棋不可下在");
                 printf("%d",I);
                 printf("%d",J);
@@ -108,13 +110,13 @@ int main(){
             }
         }
         if(color == 2){
-            if(b_around(I,J) == 1){
+            if(w_around(I,J) == 1){
                 printf("白棋可以下在");
                 printf("%d",I);
                 printf("%d\n",J);
                 break;
             }
-            else{
+            if(w_around(I,J) == 0){
                 printf("白棋不可下在");
                 printf("%d",I);
                 printf("%d",J);
