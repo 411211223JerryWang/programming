@@ -17,11 +17,11 @@ int b_around(int i,int j){
     for (int k = 0; k < 8; ++k) {
         int x = i + dx[k];
         int y = j + dy[k];
-        if (chese[x][y] == 2){
+        if (chese[x][y] == 2){   //判斷旁邊是否有白棋
             for (int l = 2; l < 8; ++l) {
                 int a = i + l*dx[k];
                 int b = j + l*dy[k];
-                if (chese[a][b] == 1){
+                if (chese[a][b] == 1){    //判斷白棋後方是否有黑棋
                     return 1;
                 }
             }
@@ -61,7 +61,7 @@ int main(){
             chese[i][j] = randomChoice;
         }
     }  
-    for (int i = 0; i < N; ++i) {
+    for (int i = 0; i < N; ++i) {    //輸出隨機棋盤
         for (int j = 0; j < N; ++j) {
             std::cout << chese[i][j] << ' '; // 输出每个元素的值，用空格分隔
         }
