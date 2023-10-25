@@ -21,7 +21,7 @@ int b_around(int i,int j){
             for (int l = 2; l < 8; ++l) {
                 int a = i + l*dx[k];
                 int b = j + l*dy[k];
-                if (chese[a][b] == 2){
+                if (chese[a][b] == 1){
                     return 1;
                 }
             }
