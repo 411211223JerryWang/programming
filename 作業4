@@ -1,0 +1,55 @@
+#include <stdio.h>
+#define range(x,y)(x <= 7 && x >= 0 && y <= 7 && y >= 0)
+
+int chess[8][8] = {
+{0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0},
+{0,0,0,1,2,0,0,0},
+{0,0,0,2,1,0,0,0},
+{0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0}
+}
+
+int position(int chess, int i, int j, int dx, int dy){
+  if (chess[i][j] == 1){    //判斷i,j若為黑棋
+    for(int n; n < 8; n++){   //給定n
+      int x = i + n*dx;
+      int y = j + n*dy;
+      if(chess[x][y] == 2){     //判斷i,j的dx,dy方向是否為白棋
+        x += dx;
+        y += dy;
+        if(chess[x][y] == 0){    //判斷白旗的下一格是否為空格
+          return n+1;     //回傳n格之後可以下
+        }
+      }
+    }
+    else{
+      return 0;
+    }
+  }
+  if (chess[i][j] == 2){     //判斷i,j若為白棋
+    for(int n; n < 8; n++){
+      int x = i + n*dx;
+      int y = j + n*dy;
+      if(chess[x][y] == 1){
+        x += dx;
+        y += dy;
+        if(chess[x][y] == 0){
+          return n+1;
+        }
+      }
+    }
+    else{
+      return 0;
+    }
+  }
+}
+
+int main(){
+  int i,j;
+  printf(da
+  cin>>i>>j;
+  
+}
