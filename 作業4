@@ -2,19 +2,32 @@
 #define range(x,y)(x <= 7 && x >= 0 && y <= 7 && y >= 0)
 
 int chess[8][8] = {
-{0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0},
-{0,0,0,1,2,0,0,0},
-{0,0,0,2,1,0,0,0},
-{0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0}
+  {0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0},
+  {0,0,0,1,2,0,0,0},
+  {0,0,0,2,1,0,0,0},
+  {0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,0}
 }
+int next[8][8] = {
+    {0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0}
+  }
 
-int position(int chess, int i, int j, int dx, int dy){
+int position(int chess[8][8],int i, int j, int dx, int dy){
+  if (chess[i][j] == 0){
+    return -1;
+  }
   if (chess[i][j] == 1){    //判斷i,j若為黑棋
-    for(int n; n < 8; n++){   //給定n
+    for(int n=1; n < 8; n++){   //給定n
       int x = i + n*dx;
       int y = j + n*dy;
       if(chess[x][y] == 2){     //判斷i,j的dx,dy方向是否為白棋
@@ -26,11 +39,11 @@ int position(int chess, int i, int j, int dx, int dy){
       }
     }
     else{
-      return 0;
+      return -2;
     }
   }
   if (chess[i][j] == 2){     //判斷i,j若為白棋
-    for(int n; n < 8; n++){
+    for(int n=1; n < 8; n++){
       int x = i + n*dx;
       int y = j + n*dy;
       if(chess[x][y] == 1){
@@ -42,14 +55,105 @@ int position(int chess, int i, int j, int dx, int dy){
       }
     }
     else{
-      return 0;
+      return -3;
+    }
+  }
+}
+void checkNewStepByColor(int chess[8][8], int next[8][8], int color) 
+{
+  if(color ==1)
+  {
+    for(int i = 0; i < 8; ++i)
+  ` {
+      for(int j = 0; j < 8; ++j){
+        if(chess[i][j] == 0){     //判斷是否為空格可下
+          int dx[] = {0, 1, 0, -1, 1, -1, 1, -1};
+          int dy[] = {1, 0, -1, 0, 1, -1, -1, 1};
+          for (int k = 0; k < 8; ++k) {
+              int x = i + dx[k];
+              int y = j + dy[k];
+              if (chese[x][y] == 2){   //判斷旁邊是否有白棋
+                  for (int l = 2; l < 8; ++l) {
+                      int a = i + l*dx[k];
+                      int b = j + l*dy[k];
+                      if (chese[a][b] == 1){    //判斷白棋後方是否有黑棋
+                          next[i][j] =1;
+                      } 
+                  }
+              }
+          }
+        }
+      }
+    }
+  }
+  if(color ==2)
+  {
+    for(int i = 0; i < 8; ++i)
+  ` {
+      for(int j = 0; j < 8; ++j){
+        if(chess[i][j] == 0){     //判斷是否為空格可下
+          int dx[] = {0, 1, 0, -1, 1, -1, 1, -1};
+          int dy[] = {1, 0, -1, 0, 1, -1, -1, 1};
+          for (int k = 0; k < 8; ++k) {
+              int x = i + dx[k];
+              int y = j + dy[k];
+              if (chese[x][y] == 1){   //判斷旁邊是否有黑棋
+                  for (int l = 2; l < 8; ++l) {
+                      int a = i + l*dx[k];
+                      int b = j + l*dy[k];
+                      if (chese[a][b] == 2){    //判斷白棋後方是否有白棋
+                          next[i][j] =2;
+                      } 
+                  }
+              }
+          }
+        }
+      }
     }
   }
 }
 
 int main(){
-  int i,j;
-  printf(da
-  cin>>i>>j;
+int t=1;
+while(t==1){
+  for(int i=0; i<8;i++){    //輸出棋盤
+    for(int j=0; j<8;j++){
+      printf("%d",chess[i][j]);
+    }
+    printf("\n");
+  }
   
+  int i,j;      //輸入格子
+  printf("請輸入判斷的格子，並在座標中間使用空格連接\n");
+  scanf("%d %d",&i,&j);
+  int dx,dy;    //輸入方位
+  printf("請輸入判斷的方位(限-1~1)，並在座標中間使用空格連接\n");
+  scanf("%d %d",&dx,&dy);
+  int ans = position(chess[8][8],i, j, dx, dy);
+  if(ans == -1)
+  {
+    printf("你輸入的格子為空格，請重新輸入\n");
+    continue;
+  }
+  else if(ans == -2)
+  {
+    printf("你輸入的是黑棋，但在所選的方向並沒有可以下的地方，請重新輸入\n");
+    continue;
+  }
+  else if(ans == -3)
+  {
+    printf("你輸入的是白棋，但在所選的方向並沒有可以下的地方，請重新輸入\n");
+    continue;
+  }
+  else{
+    printf("在%d格可以下\n",ans);
+    break;
+  }
+}
+while(t==1){
+  int color;
+  printf("輸入想判斷的顏色(黑棋為1，白棋為2\n")
+  scanf("%d\n",color)
+  
+}
 }
