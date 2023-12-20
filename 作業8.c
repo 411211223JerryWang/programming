@@ -165,7 +165,7 @@ int shorteststeps(int startX, int startY, int endX, int endY) {
 }
 
 // 使用堆疊找出老鼠走過的路徑
-int findPathWithStack(int startX, int startY, int endX, int endY) {
+int findMosesteps(int startX, int startY, int endX, int endY) {
     Stack stack;
     initStack(&stack);
     push(&stack, startX, startY);   //初始化後放入起點
@@ -202,6 +202,6 @@ int findPathWithStack(int startX, int startY, int endX, int endY) {
 int main() {
 
     printf("迷宮入口至出口老鼠所走過的路徑：\n");
-    findPathWithStack(6, 9, 1, 0);
+    findMosesteps(6, 9, 1, 0);
     return 0;
 }
