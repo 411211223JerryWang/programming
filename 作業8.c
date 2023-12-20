@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 #define MAX_N 10
 #define STACK_SIZE (MAX_N * MAX_N)
 
@@ -68,7 +67,7 @@ void printMaze() {
 void change(int startX, int startY, int endX, int endY){
     for (int i = 0; i < MAX_N; i++) {
         for (int j = 0; j < MAX_N; j++) {
-            if (maze[i][j] == 'x' && (i != startX && j != startY) && (i != endX && j != endY)){ //迴圈判斷是否為走過的路徑X
+            if (maze[i][j] == 'x' && !(i == startX && j == startY) && !(i == endX && j == endY)){ //迴圈判斷是否為走過的路徑X
                 if (i == 0 && j == 0) {     //若是在最左上角的x
                     int space = 0;
                     if (maze[i+1][j] == 'x'){
@@ -78,10 +77,11 @@ void change(int startX, int startY, int endX, int endY){
                         space += 1;
                     }
                     if (space == 1){        //若只有與其他一個x相連代表是多餘的路徑
-                        maze[i][j] == 1;     //重製成牆壁
+                        maze[i][j] = 1;     //重製成牆壁
                     }
+                    continue;
                 }
-                if (i == 9 && j == 9) {     //若是在最右下角的x
+                else if (i == 9 && j == 9) {     //若是在最右下角的x
                     int space = 0;
                     if (maze[i-1][j] == 'x'){
                         space += 1;
@@ -90,10 +90,11 @@ void change(int startX, int startY, int endX, int endY){
                         space += 1;
                     }
                     if (space == 1){
-                        maze[i][j] == 1;
+                        maze[i][j] = 1;
                     }
+                    continue;
                 }
-                if (i == 0 && j == 9) {     //若是在最右上角的x
+                else if (i == 0 && j == 9) {     //若是在最右上角的x
                     int space = 0;
                     if (maze[i][j-1] == 'x'){
                         space += 1;
@@ -102,10 +103,11 @@ void change(int startX, int startY, int endX, int endY){
                         space += 1;
                     }
                     if (space == 1){
-                        maze[i][j] == 1;
+                        maze[i][j] = 1;
                     }
+                    continue;
                 }
-                if (i == 9 && j == 0) {     //若是在最左下角的x
+                else if (i == 9 && j == 0) {     //若是在最左下角的x
                     int space = 0;
                     if (maze[i][j+1] == 'x'){
                         space += 1;
@@ -114,10 +116,11 @@ void change(int startX, int startY, int endX, int endY){
                         space += 1;
                     }
                     if (space == 1){
-                        maze[i][j] == 1;
+                        maze[i][j] = 1;
                     }
+                    continue;
                 }
-                if (i == 0 || i == 9){      //若是在上下兩邊的x
+                else if (i == 0){      //若是在上邊的x
                     int space = 0;
                     if (maze[i][j+1] == 'x'){
                         space += 1;
@@ -125,11 +128,31 @@ void change(int startX, int startY, int endX, int endY){
                     if (maze[i][j-1] == 'x'){
                         space += 1;
                     }
-                    if (space == 1){
-                        maze[i][j] == 1;
+                    if (maze[i+1][j] == 'x'){
+                        space += 1;
                     }
+                    if (space == 1){
+                        maze[i][j] = 1;
+                    }
+                    continue;
                 }
-                if (j == 0 || j == 9){      //若是在左右兩邊的x
+                else if (i == 9){      //若是在下邊的x
+                    int space = 0;
+                    if (maze[i][j+1] == 'x'){
+                        space += 1;
+                    }
+                    if (maze[i][j-1] == 'x'){
+                        space += 1;
+                    }
+                    if (maze[i-1][j] == 'x'){
+                        space += 1;
+                    }
+                    if (space == 1){
+                        maze[i][j] = 1;
+                    }
+                    continue;
+                }
+                else if (j == 0){      //若是在左邊的x
                     int space = 0;
                     if (maze[i+1][j] == 'x'){
                         space += 1;
@@ -137,9 +160,48 @@ void change(int startX, int startY, int endX, int endY){
                     if (maze[i-1][j] == 'x'){
                         space += 1;
                     }
-                    if (space == 1){
-                        maze[i][j] == 1;
+                    if (maze[i][j+1] == 'x'){
+                        space += 1;
                     }
+                    if (space == 1){
+                        maze[i][j] = 1;
+                    }
+                    continue;
+                }
+                else if (j == 9){      //若是在右邊的x
+                    int space = 0;
+                    if (maze[i+1][j] == 'x'){
+                        space += 1;
+                    }
+                    if (maze[i-1][j] == 'x'){
+                        space += 1;
+                    }
+                    if (maze[i][j-1] == 'x'){
+                        space += 1;
+                    }
+                    if (space == 1){
+                        maze[i][j] = 1;
+                    }
+                    continue;
+                }
+                else if (i != 0 && i != 9 && j != 0 && j != 9) {                        //若是在中間的x
+                    int space = 0;
+                    if (maze[i+1][j] == 'x'){
+                        space += 1;
+                    }
+                    if (maze[i-1][j] == 'x'){
+                        space += 1;
+                    }
+                    if (maze[i][j+1] == 'x'){
+                        space += 1;
+                    }
+                    if (maze[i][j-1] == 'x'){
+                        space += 1;
+                    }
+                    if (space == 1){
+                        maze[i][j] = 1;
+                    }
+                    continue;
                 }
             }
         }
@@ -149,15 +211,23 @@ void change(int startX, int startY, int endX, int endY){
 //比較找出最短部步數
 int shorteststeps(int startX, int startY, int endX, int endY) {
     int step = 1;
-    int newstep = 0;    //設定新舊步數
+    int newstep = 0; //設定新舊步數
     while (step != newstep){    //重複直到新舊步數一樣
         step = newstep; //更新步數
+        newstep = 0;
         change(startX, startY, endX, endY); //刪除多餘的步數
         for (int i = 0; i < MAX_N; i++) {
             for (int j = 0; j < MAX_N; j++) {
                 if (maze[i][j] == 'x') {    //計算所有步數
                     newstep += 1;
                 }
+            }
+        }
+    }
+    for (int i = 0; i < MAX_N; i++) {   //覆蓋沒走過的區域
+        for (int j = 0; j < MAX_N; j++) {
+            if (maze[i][j] == 0){
+                maze[i][j] = 1;
             }
         }
     }
@@ -178,8 +248,10 @@ int findMosesteps(int startX, int startY, int endX, int endY) {
         // 如果走到出口，則印出路徑和最小步數並結束
         if (x == endX && y == endY) {
             maze[x][y] = 'x';
+            printf("迷宮入口至出口老鼠所走過的路徑：\n");
+            printMaze();
             int ans = shorteststeps(startX, startY, endX, endY);
-            printf("宮入口至出口老鼠所走過的路徑(x):\n");
+            printf("老鼠能走得最短路徑:\n");
             printMaze();
             printf("一共走了%d步\n", ans);
             return 1; // 返回 1 代表找到路徑
@@ -200,8 +272,8 @@ int findMosesteps(int startX, int startY, int endX, int endY) {
 }
 
 int main() {
-
-    printf("迷宮入口至出口老鼠所走過的路徑：\n");
+    printf("迷宮地圖(#為牆,x為走過的路徑,.為可以走的路徑)：\n");
+    printMaze();
     findMosesteps(6, 9, 1, 0);
     return 0;
 }
