@@ -1,1 +1,311 @@
+assert.h(來源於維基百科和gitbook.net)
+assert.h 是 C 語言中的標準庫標頭文件之一，提供了一個用於在程式運行時進行斷言的工具。斷言是一種檢查程序假設是否成立的方式，如果斷言的條件不成立，則程式將停止執行並輸出相應的錯誤信息。
 
+包含頭文件：
+
+使用 assert.h 需要在程式中包含該頭文件：
+
+#include <assert.h>
+assert 函數：
+
+assert 函數是 assert.h 中最重要的函數。它用於檢查表達式是否為真。如果表達式為假，則 assert 函數將顯示錯誤消息，並終止程式的執行。
+
+#include <assert.h>
+
+int main() {
+    int x = 5;
+
+    assert(x == 10);
+
+    // 如果 x 不等於 10，程式將終止並顯示錯誤消息
+    printf("Program continues after the assertion.\n");
+
+    return 0;
+}
+NDEBUG 宏：
+
+assert.h 還提供了一個宏 NDEBUG，當定義了這個宏時，assert 函數將不起作用。這在生產環境中很有用，因為在正式發布時，通常不希望讓程式因為斷言而停止執行。
+
+#include <assert.h>
+
+#define NDEBUG  // 定義 NDEBUG 以禁用 assert 函數
+
+int main() {
+    int x = 5;
+
+    assert(x == 10);  // 不起作用
+
+    // 這裡的程式不會停止執行
+
+    return 0;
+}
+自定義斷言信息：
+
+assert 函數的錯誤信息可以通過自定義消息進行修改：
+
+#include <assert.h>
+
+int main() {
+    int x = 5;
+
+    assert(x == 10 && "x must be 10");
+
+    // 如果 x 不等於 10，程式將終止並顯示自定義錯誤消息
+
+    return 0;
+}
+在這個例子中，如果 x 不等於 10，錯誤消息將顯示為 "x must be 10"。
+
+assert.h 提供了一個方便的機制，用於在開發和測試階段對程序進行斷言，以確保程序的正確性。在生產環境中，可以使用 NDEBUG 宏來禁用斷言，以確保程序不會因為斷言而停止執行。
+
+math.h(來源於維基百科和gitbook.net)
+math.h 是 C 語言中的標準庫標頭文件之一，提供了一系列數學函數的原型和定義。
+
+包含頭文件：
+
+使用 math.h 需要在程式中包含該頭文件：
+
+#include <math.h>
+基本數學函數：
+
+math.h 提供了許多基本的數學函數，如平方根、指數、對數、三角函數等。這些函數的使用方式如下：
+
+#include <math.h>
+
+int main() {
+    double x = 4.0;
+
+    double squareRoot = sqrt(x);  // 平方根函數
+    double power = pow(x, 2);      // 次方函數，2 的平方
+
+    double logValue = log(x);     // 自然對數函數
+    double sinValue = sin(x);     // 正弦函數
+
+    return 0;
+}
+數學常數：
+
+math.h 還定義了一些常用的數學常數，如 π（pi）和自然對數的底數等。這些常數可以通過宏的形式使用：
+
+#include <math.h>
+
+int main() {
+    double pi = M_PI;   // π 的值
+    double e = M_E;     // 自然對數的底數 e 的值
+
+    return 0;
+}
+取整函數：
+
+math.h 中包含取整函數，如 ceil（向上取整）、floor（向下取整）、round（四捨五入）等：
+
+#include <math.h>
+
+int main() {
+    double x = 4.6;
+
+    double ceilValue = ceil(x);   // 向上取整
+    double floorValue = floor(x); // 向下取整
+    double roundValue = round(x); // 四捨五入
+
+    return 0;
+}
+三角函數：
+
+math.h 中包含常見的三角函數，如正弦、餘弦、正切等：
+
+#include <math.h>
+
+int main() {
+    double angle = 30.0;
+
+    double sinValue = sin(angle);  // 正弦
+    double cosValue = cos(angle);  // 餘弦
+    double tanValue = tan(angle);  // 正切
+
+    // 其他三角函數類似...
+
+    return 0;
+}
+math.h 提供了豐富的數學函數和常數，可以滿足許多數學計算的需求。在使用這些函數時，應注意引用正確的頭文件，以及處理可能的特殊情況，如除零等。
+
+ctype.h(來源於維基百科和gitbook.net)
+`ctype.h` 是 C 語言中的標準庫標頭文件之一，提供了一系列用於字符處理的函數。
+
+1. 包含頭文件：
+   
+   使用 `ctype.h` 需要在程式中包含該頭文件：
+   #include <ctype.h>
+
+
+2. 字符分類函數：
+
+   `ctype.h` 提供了一系列函數，用於判斷字符的類型，如字母、數字、空格等：
+
+   - `isalpha`：判斷字符是否為字母。
+   - `isdigit`：判斷字符是否為數字。
+   - `isspace`：判斷字符是否為空格。
+   - `isalnum`：判斷字符是否為字母或數字。
+   - `islower`：判斷字符是否為小寫字母。
+   - `isupper`：判斷字符是否為大寫字母。
+
+
+   這些函數返回非零值表示條件成立，返回零表示條件不成立。
+
+   #include <ctype.h>
+   #include <stdio.h>
+
+   int main() {
+       char ch = 'A';
+
+       if (isalpha(ch)) {
+           printf("%c is an alphabet.\n", ch);
+       }
+
+       if (isdigit(ch)) {
+           printf("%c is a digit.\n", ch);
+       }
+
+       if (isupper(ch)) {
+           printf("%c is an uppercase letter.\n", ch);
+       }
+
+       // 其他字符分類函數的使用...
+
+       return 0;
+   }
+
+3. 字符轉換函數：
+
+   `ctype.h` 還提供了一些函數，用於轉換字符的大小寫：
+
+   `tolower`：將大寫字母轉換為小寫。
+   `toupper`：將小寫字母轉換為大寫。
+
+   #include <ctype.h>
+   #include <stdio.h>
+
+   int main() {
+       char ch = 'A';
+
+       char lowerCh = tolower(ch);
+       printf("Lowercase of %c is %c.\n", ch, lowerCh);
+
+       char upperCh = toupper(ch);
+       printf("Uppercase of %c is %c.\n", ch, upperCh);
+
+       return 0;
+   }
+  
+4. 字符測試和轉換的寬字符版本：
+
+   `ctype.h` 中的函數有一組寬字符版本，這些函數的名稱以 `w` 結尾，例如 `iswalpha`、`towlower`、`towupper`，這些函數針對寬字符（`wchar_t`）進行操作。
+
+   #include <wctype.h>
+   #include <wchar.h>
+
+   int main() {
+       wint_t wideCh = L'A';
+
+       if (iswalpha(wideCh)) {
+           wprintf(L"%lc is a wide alphabet.\n", wideCh);
+       }
+
+       wint_t wideLowerCh = towlower(wideCh);
+       wprintf(L"Lowercase of %lc is %lc.\n", wideCh, wideLowerCh);
+
+       wint_t wideUpperCh = towupper(wideCh);
+       wprintf(L"Uppercase of %lc is %lc.\n", wideCh, wideUpperCh);
+
+       return 0;
+   }
+`ctype.h` 提供了一系列用於字符處理的函數，包括字符的分類、大小寫轉換等，這些函數在處理字符時非常實用。
+
+
+time.h
+`time.h` 是 C 語言中的標準庫標頭文件之一，提供了一些用於時間和日期操作的函數。
+1. 包含頭文件：
+   使用 `time.h` 需要在程式中包含該頭文件：
+   #include <time.h>
+   #include <stdio.h>
+
+2. `time` 函數:
+   `time` 函數返回自協調世界時 (UTC) 1970 年 1 月 1 日午夜（稱為 Epoch）以來經過的秒數。
+   int main() {
+       time_t currentTime;
+       time(&currentTime);
+
+       printf("Current time: %ld\n", currentTime);
+
+       return 0;
+   }
+
+3. `localtime` 函數：
+   `localtime` 函數將 `time_t` 值轉換為本地時間的 `struct tm` 結構體。
+
+   int main() {
+       time_t currentTime;
+       time(&currentTime);
+
+       struct tm* localTime = localtime(&currentTime);
+
+       printf("Local time: %d-%02d-%02d %02d:%02d:%02d\n",
+              localTime->tm_year + 1900, localTime->tm_mon + 1, localTime->tm_mday,
+              localTime->tm_hour, localTime->tm_min, localTime->tm_sec);
+
+       return 0;
+   }
+
+4. `strftime` 函數：
+   `strftime` 函數將時間格式化為字符串。
+
+   int main() {
+       time_t currentTime;
+       time(&currentTime);
+
+       struct tm* localTime = localtime(&currentTime);
+
+       char timeString[50];
+       strftime(timeString, sizeof(timeString), "Formatted time: %Y-%m-%d %H:%M:%S", localTime);
+
+       printf("%s\n", timeString);
+
+       return 0;
+   }
+
+5. `difftime` 函數：
+
+   `difftime` 函數計算兩個 `time_t` 值之間的秒數差異。
+
+   int main() {
+       time_t startTime, endTime;
+       time(&startTime);
+
+       // Some code to do some work...
+
+       time(&endTime);
+
+       double secondsElapsed = difftime(endTime, startTime);
+       printf("Time elapsed: %.2f seconds\n", secondsElapsed);
+
+       return 0;
+   }
+
+6. `clock` 函數：
+
+   `clock` 函數返回程序運行所花的時鐘數（以時鐘單位為單位）。
+
+   int main() {
+       clock_t startClock, endClock;
+       startClock = clock();
+
+       // Some code to do some work...
+
+       endClock = clock();
+
+       double cpuTimeUsed = ((double)(endClock - startClock)) / CLOCKS_PER_SEC;
+       printf("CPU time used: %.2f seconds\n", cpuTimeUsed);
+
+       return 0;
+   }
+這些範例涵蓋了 `time.h` 中的一些基本函數，包括獲取當前時間、轉換為本地時間、時間格式化、計算時間差異等。
